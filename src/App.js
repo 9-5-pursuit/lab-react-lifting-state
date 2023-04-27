@@ -2,15 +2,16 @@ import { useState } from "react";
 import eventsData from "./data";
 import { v1 as generateUniqueID } from "uuid";
 // import Attendees from "./Attendees";
-// import Event from "./Components/Event";
-// import Footer from "./Components/Footer";
-// import Header from "./Components/Header";
-// import NewEventForm from "./Components/NewEventForm";
+import Event from "./Components/Event";
+import Footer from "./Components/Footer";
+import Header from "./Components/Header";
+import NewEventForm from "./Components/NewEventForm";
+import Attendees from "./Components/Attendees";
 
 function App() {
-  const [events, setEvents] = useState(eventsData);
+  const [events, setEvents] = useState(eventsData); //
 
-  const [showAttendees, setShowAttendees] = useState(false);
+  //const [showAttendees, setShowAttendees] = useState(false);
 
   const [selectOption, setSelectOption] = useState("");
 
@@ -70,9 +71,9 @@ function App() {
     setEvents([event, ...events]);
   }
 
-  function toggleEventAttendees() {
-    setShowAttendees(!showAttendees);
-  }
+  // function toggleEventAttendees() {
+  //   setShowAttendees(!showAttendees);
+  // }
 
   function updateEventAttendance(eventId, attendeeId) {
     const eventArray = [...events];
@@ -90,14 +91,36 @@ function App() {
 
   return (
     <div className="App">
-      <>
-        <header>
-          <h1 className="color-change-5x">RSVP App</h1>
-        </header>
-      </>
+      <Header />
       <main>
         <div className="new-event">
-          <>
+          <NewEventForm
+            handleSubmit={handleSubmit}
+            handleTextChange={handleTextChange}
+            handleSelectChange={handleSelectChange}
+            newEvent={newEvent}
+          />
+        </div>
+        <div className="events">
+          <Event
+            //toggleEventAttendees={toggleEventAttendees} //move this function call into Event.js
+            //showAttendees={showAttendees} //Move this state into Event.js
+            updateEventAttendance={updateEventAttendance}
+            events={events}
+            Attendees={Attendees}
+          />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
+
+//just in case--------------------//
+
+/* <>
             <form onSubmit={handleSubmit}>
               <h3>Create a new event</h3>
               <label htmlFor="name">Event name:</label>
@@ -135,15 +158,10 @@ function App() {
               <br />
               <input type="submit" />
             </form>
-          </>
-        </div>
-        <div className="events">
-          <ul>
-            {events.map((event) => {
-              const { people: attendees } = event;
+          </> */
 
-              return (
-                <>
+//Event
+/* <>
                   <li key={event.id}>
                     <img src={event.eventImage} alt={event.name} />
                     <h5>
@@ -200,23 +218,20 @@ function App() {
                       ) : null}
                     </>
                   </li>
-                </>
-              );
-            })}
-          </ul>
-        </div>
-      </main>
-      <>
-        <footer>
-          <ul>
-            <li>Contact</li>
-            <li>About</li>
-            <li>Legal</li>
-          </ul>
-        </footer>
-      </>
-    </div>
-  );
-}
+                </> */
+//Event 2
+/* <ul>
+{events.map((event) => {
+  const { people: attendees } = event;
 
-export default App;
+  return (
+    <Event
+      attendees={attendees}
+      event={event}
+      toggleEventAttendees={toggleEventAttendees}
+      showAttendees={showAttendees}
+      updateEventAttendance={updateEventAttendance}
+    />
+  );
+})}
+</ul> */
