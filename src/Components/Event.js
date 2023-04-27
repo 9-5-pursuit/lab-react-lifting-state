@@ -1,9 +1,8 @@
 import Attendees from "./Attendees";
-import { useState } from "react";
 export default function Event({event, attendees, updateEventAttendance }) {
 
   return(
-    <li key={event.id}>
+    <li key={event.id} className="event">
     <img src={event.eventImage} alt={event.name} />
     <h5>
       {event.name} {event.eventType}
