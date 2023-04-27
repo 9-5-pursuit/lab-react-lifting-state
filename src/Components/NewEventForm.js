@@ -1,4 +1,3 @@
-import { useState } from "react";
 export default function NewEventForm({ handleSelectChange, handleSubmit, handleTextChange, newEvent }) {
 
   return (

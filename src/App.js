@@ -1,7 +1,6 @@
 import { useState } from "react";
 import eventsData from "./data";
 import { v1 as generateUniqueID } from "uuid";
-//import Attendees from "./Attendees";
 import Event from "./Components/Event";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -84,9 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <>
-        <Header />
-      </>
+      <Header />
       <main>
         <NewEventForm handleSelectChange={handleSelectChange} handleSubmit={handleSubmit} handleTextChange={handleTextChange} newEvent={newEvent} />
         <div className="events">
@@ -95,18 +92,13 @@ function App() {
               const { people: attendees } = event;
 
               return (
-                <>
-                  <Event event={event} attendees={attendees} updateEventAttendance={updateEventAttendance} />
-
-                </>
+                <Event event={event} attendees={attendees} updateEventAttendance={updateEventAttendance} />
               );
             })}
           </ul>
         </div>
       </main>
-      <>
-        <Footer />
-      </>
+      <Footer />
     </div>
   );
 }
