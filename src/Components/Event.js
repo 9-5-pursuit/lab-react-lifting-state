@@ -1,7 +1,7 @@
 import Attendees from "./Attendees";
 import { useState } from "react";
-export default function Event({event, attendees, updateEventAttendance, toggleEventAttendees, showAttendees}) {
-  const [showAttendees, setShowAttendees] = useState(false);
+export default function Event({event, attendees, updateEventAttendance }) {
+
   return(
     <li key={event.id}>
     <img src={event.eventImage} alt={event.name} />
@@ -12,8 +12,7 @@ export default function Event({event, attendees, updateEventAttendance, toggleEv
     <span>Organized by: {event.organizer} </span>
     <br />
     <>
-        <Attendees attendees={attendees} event={event} updateEventAttendance={updateEventAttendance} 
-        toggleEventAttendees={toggleEventAttendees} showAttendees={showAttendees} />
+        <Attendees attendees={attendees} event={event} updateEventAttendance={updateEventAttendance}  />
     </>
   </li>
   )

@@ -1,11 +1,19 @@
-export default function Attendees({ attendees, event, updateEventAttendance, toggleEventAttendees, showAttendees }) {
+import { useState } from "react";
+export default function Attendees({ attendees, event, updateEventAttendance }) {
+  const [showAttendees, setShowAttendees] = useState(false);
+
+  function toggleEventAttendees() {
+    setShowAttendees(!showAttendees);
+  }
+
   return (
     <>
       <button onClick={toggleEventAttendees}>
         {!showAttendees ? "Show Attendees" : "Hide Attendees"}
       </button>
       {showAttendees ? (
-      <div className="attendees">
+      <div className="attendee">
+        <Attendees/>
       {attendees.map((attendee, index) => (
         <>
           <div key={attendee.id} className="attendee">
