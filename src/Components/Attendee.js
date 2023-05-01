@@ -1,3 +1,5 @@
+import React from "react"
+
 export default function Attendee({ attendee, updateEventAttendance, event }) {
   return (
     <div key={attendee.id} className="attendee">
