@@ -4,7 +4,7 @@ export default function Event({ event, updateEventAttendance }) {
   return (
     <>
       <li key={event.id} className="event">
-        <img src="{event.eventImage} alt={event.name}">
+        <img src="{event.eventImage} alt={event.name}"/>
           <h5>
             {event.name} {event.eventType}
           </h5>
@@ -15,7 +15,7 @@ export default function Event({ event, updateEventAttendance }) {
             event={event}
             updateEventAttendance={updateEventAttendance}
           />
-        </img>
+      
       </li>
     </>
   );
