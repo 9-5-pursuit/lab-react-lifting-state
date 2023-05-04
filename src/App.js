@@ -9,8 +9,8 @@ import NewEventForm from "./Components/NewEventForm";
 
 function App() {
   const [events, setEvents] = useState(eventsData);
-  const [showAttendees, setShowAttendees] = useState(false);
   const [selectOption, setSelectOption] = useState("");
+  // const [showAttendees, setShowAttendees] = useState(false)
   const [newEvent, setNewEvent] = useState({
     id: "",
     eventType: "",
@@ -34,20 +34,20 @@ function App() {
     handleAddEvent(createEvent);
   }
 
-  function handleSelectChange(e) {
-    setSelectOption(e.target.value);
+  function handleSelectChange(event) {
+    setSelectOption(event.target.value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
     addEvent();
     resetEventForm();
   }
 
-  function handleTextChange(e) {
+  function handleTextChange(event) {
     setNewEvent({
       ...newEvent,
-      [e.target.id]: e.target.value,
+      [event.target.id]: event.target.value,
     });
   }
 
@@ -67,9 +67,11 @@ function App() {
     setEvents([event, ...events]);
   }
 
-  function toggleEventAttendees() {
-    setShowAttendees(!showAttendees);
-  }
+  // function toggleEventAttendees() {
+  //   setShowAttendees(!showAttendees);
+  // }
+
+
 
   function updateEventAttendance(eventId, attendeeId) {
     const eventArray = [...events];
@@ -90,20 +92,31 @@ function App() {
       <Header/>
       <main>
         <div className="new-event">
+   
           < NewEventForm
           newEvent={newEvent}
           handleSubmit={handleSubmit}
           handleTextChange={handleTextChange}
           handleSelectChange={handleSelectChange}
+          handleAddEvent={handleAddEvent}
            />
+
         </div>
         <div className="events">
-          <Event
-          events={events}
-          showAttendees={showAttendees}
-          toggleEventAttendees={toggleEventAttendees}
+        <ul>
+          {events.map((event) => {
+          const { people: attendees } = event;
+
+      return (
+        <Event
+        key={event.id}
+          event={event}
           updateEventAttendance={updateEventAttendance}
+          attendees={attendees} 
           />
+      );
+    })}
+  </ul>
         </div>
       </main>
       <Footer/>
