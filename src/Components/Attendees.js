@@ -1,16 +1,10 @@
-import React, { useState } from "react";
-
-export default function Attendees({
-  event,
-  attendees,
-  updateEventAttendance,
-}) {
+import Attendee from "./Attendee";
+import { useState } from "react";
+export default function Attendees({ attendees, event, updateEventAttendance }) {
   const [showAttendees, setShowAttendees] = useState(false);
-
   function toggleEventAttendees() {
     setShowAttendees(!showAttendees);
   }
-
   return (
     <>
       <button onClick={toggleEventAttendees}>
@@ -20,31 +14,11 @@ export default function Attendees({
       {showAttendees ? (
         <div className="attendees">
           {attendees.map((attendee, index) => (
-            <React.Fragment key={index}>
-              <div key={attendee.id} className="attendee">
-                <p>
-                  <img src={attendee.avatar} alt={attendee.firstName} />
-                  {"   "}
-                  <span>
-                    {" "}
-                    {attendee.firstName} {attendee.lastName}{" "}
-                  </span>
-                </p>
-                <p>
-                  <button
-                    className="clickable"
-                    onClick={() => updateEventAttendance(event.id, attendee.id)}
-                  >
-                    Attending:
-                  </button>
-                  <span>{attendee.attendance ? "✅" : "❌"}</span>
-                </p>
-
-                <p>
-                  <span>Note:</span> {attendee.note}
-                </p>
-              </div>
-            </React.Fragment>
+            <Attendee
+              event={event}
+              updateEventAttendance={updateEventAttendance}
+              attendee={attendee}
+            />
           ))}
         </div>
       ) : null}

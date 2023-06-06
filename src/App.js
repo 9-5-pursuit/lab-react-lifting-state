@@ -5,12 +5,9 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import NewEventForm from "./Components/NewEventForm";
 import Event from "./Components/Event";
-import Attendees from "./Attendees";
 
 function App() {
   const [events, setEvents] = useState(eventsData);
-
-  const [showAttendees, setShowAttendees] = useState(false);
 
   const [selectOption, setSelectOption] = useState("");
 
@@ -70,8 +67,6 @@ function App() {
     setEvents([event, ...events]);
   }
 
-
-
   function updateEventAttendance(eventId, attendeeId) {
     const eventArray = [...events];
     const eventIndex = eventArray.findIndex((event) => eventId === event.id);
@@ -90,6 +85,7 @@ function App() {
     <div className="App">
       <Header />
       <main>
+        {/* KEEP THE MAIN INSIDE OF THE APP DOES NOT NEED TO BE MOVED */}
         <div className="new-event">
           <NewEventForm
             handleSubmit={handleSubmit}
@@ -106,8 +102,9 @@ function App() {
               return (
                 <>
                   <Event
+                    key={event.id}
                     event={event}
-                    toggleEventAttendees=
+                    
                     attendees={attendees}
                     updateEventAttendance={updateEventAttendance}
                   />
