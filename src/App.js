@@ -6,12 +6,11 @@ import Event from "./Components/Event";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import NewEventForm from "./Components/NewEventForm";
-import Attendees from "./Components/Attendees";
 
 function App() {
   const [events, setEvents] = useState(eventsData); //
 
-  //const [showAttendees, setShowAttendees] = useState(false);
+  const [showAttendees, setShowAttendees] = useState(false);
 
   const [selectOption, setSelectOption] = useState("");
 
@@ -71,9 +70,9 @@ function App() {
     setEvents([event, ...events]);
   }
 
-  // function toggleEventAttendees() {
-  //   setShowAttendees(!showAttendees);
-  // }
+  function toggleEventAttendees() {
+    setShowAttendees(!showAttendees);
+  }
 
   function updateEventAttendance(eventId, attendeeId) {
     const eventArray = [...events];
@@ -102,13 +101,29 @@ function App() {
           />
         </div>
         <div className="events">
-          <Event
+          {/* <Event
             //toggleEventAttendees={toggleEventAttendees} //move this function call into Event.js
             //showAttendees={showAttendees} //Move this state into Event.js
             updateEventAttendance={updateEventAttendance}
             events={events}
             Attendees={Attendees}
-          />
+          /> */}
+          <ul>
+            {events.map((event) => {
+              const { people: attendees } = event;
+              return (
+                <>
+                  <Event
+                    event={event}
+                    toggleEventAttendees={toggleEventAttendees}
+                    showAttendees={showAttendees}
+                    attendees={attendees}
+                    updateEventAttendance={updateEventAttendance}
+                  />
+                </>
+              );
+            })}
+          </ul>
         </div>
       </main>
       <Footer />
